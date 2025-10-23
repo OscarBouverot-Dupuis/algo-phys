@@ -25,38 +25,22 @@ This package performs Monte Carlo simulations on the tilted sine-Gordon model, u
 The version of C++ used was C++17.
 Choose the simulation parameters by editing the Constants.h file. The parameters to update from are
 - #include "Sampler\_\*.h" : choose algorithm to use by replacing \* by Wo or SmoWo.
-- Ls : all system sizes L. Format : vector of strictly positive ints.
+- Ls : all system sizes $L$. Format : vector of strictly positive ints.
 - Bs : all system inverse temperatures $\beta=1/T$. Format : vector of strictly positive ints.
-- Ks : all Luttinger parameters K. Format : vector of strictly positive doubles. 
-- alphas : all dissipation strengths alpha. Format : vector of positive doubles.
-- g : Umklapp strength g. Format : positive double.
-- s : bath exponent s. Format : positive double.
+- Ks : all Luttinger parameters $K$. Format : vector of strictly positive doubles. 
+- mus : all chemical potentials $\mu$. Format : vector of positive doubles.
+- g : Umklapp strength $g$. Format : positive double.
+- lambda_w : worm event rate. Format : strictly postive double
 - path : path to store the data. Format : string.
-- OBSERVABLES : observables (can do one or several) to compute and save. "orderparameter" returns the staggered magnetization, "algotime" the algorithmic time in number of operations (not sweeps) and "field" the actual field configuration. Format : vector of strings.
+- OBSERVABLES : observables (can do one or several) to compute and save. "N_space" and "N_time" return the winding numbers $N_x$ and $N_\tau$, "kappa" and "rho_s" are the compressibility $\kappa$ and superfluid stiffness $\rho_s$, "C_2kf" is the amplitude of $2k_F$ modulation of the density, "C_theta" is an array containing the times the worm head has spent at a distance $x$ and time $\tau$ from its tail, "Ct_phi" and "Cx_phi" are $C_\varphi(x,0)$ and $C_\varphi(0,\tau)$, "algotime" is the algorithmic time in number of operations (not sweeps) and "field" the actual field configuration. Format : vector of strings.
 - PERCENT\_SAVE : save observables after every PERCENT\_SAVE % of the simulation. Format : strictly positive int.
 - TOTAL\_NUMBER\_SAMPLE : total number of samples for each observables. Format : strictly positive double.
 - OUTPUT\_DISTANCE\_SWEEPS : samples are ouputted after OUTPUT\_DISTANCE\_SWEEPS*N^2 operations. Format : strictly positive int.
-
-std::vector<int> Ls = { 256 };
-std::vector<int> Bs = { 256 };
-std::vector<double> Ks = { 0.35 };
-std::vector<double> mus = { 0 };
-double g = 1;
-
-//Sampling
-double lambda_w = 1;
-double lambda_r_prefactor = 0.1;
-std::string path = "C:\\Users\\oscar\\algo_Mott\\results\\SmoWo_tests";    //for instance C:\\Users\\...
-std::vector<std::string> OBSERVABLES({ "N_space", "N_time", "field" });  //Select any from: "N_space", "N_time", "kappa", "rho_s", "C_2kf", "C_theta", "Ct_phi", "Cx_phi", "algotime", "field"
-int PERCENT_SAVE = 1;
-double TOTAL_NUMBER_SAMPLE = 1000;
-double OUTPUT_DISTANCE_SWEEPS = 20;
-int data_block_avg = 20;
+- data_block_avg : the array-formatted observables are averaged over data_blcok_avg samples before being saved. This prevents the output files from being too large. Format: strictly positive int.
 
 ### Usage ###
 Update the Constants.h file as explained in the above. Execute the file main.cpp using the g++ compiler command or a C++ editor (Visual Studio, etc.).
 
 
 ### Funding ###
-
-This work was made possible thanks to Institut Pascal at Université Paris-Saclay with the support of the program _Investissements d’avenir_ ANR-11-IDEX-0003-01 and thanks to the support of the French ANR under the grant ANR-22-CMAS-0001 (_QuanTEdu-France_ project), the grant ANR-20-CE46-0007 (_SuSa_ project) and the grant ANR-23-CE30-0031-04 (_DISCREEP_ project).
+This work was made possible thanks to the support of the French ANR under the grant ANR-22-CMAS-0001 (_QuanTEdu-France_ project), and the support of the French government through the France 2030 program (PhOM – Graduate School of Physics), under reference ANR-11-IDEX-0003 (Project Mascotte, L. Foini).
