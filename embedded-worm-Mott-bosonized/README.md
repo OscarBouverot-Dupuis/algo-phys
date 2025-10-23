@@ -31,7 +31,7 @@ Choose the simulation parameters by editing the Constants.h file. The parameters
 - mus : all chemical potentials $\mu$. Format : vector of positive doubles.
 - g : Umklapp strength $g$. Format : positive double.
 - lambda_w : worm event rate $\lambda_\mathrm{w}$. Format : strictly postive double.
-- lambda_r_prefactor : sets the refreshment rate as $\lambda_\mathrm{r}=$lambda_r_prefactor$/(\beta L)$. Format : strictly postive double.
+- lambda_r_prefactor : sets the refreshment rate as $\lambda_\mathrm{r}=$ lambda_r_prefactor $/(\beta L)$. Format : strictly postive double.
 - path : path to store the data. Format : string.
 - OBSERVABLES : observables (can do one or several) to compute and save. "N_space" and "N_time" return the winding numbers $N_x$ and $N_\tau$, "kappa" and "rho_s" are the compressibility $\kappa$ and superfluid stiffness $\rho_s$, "C_2kf" is the amplitude of $2k_F$ modulation of the density, "C_theta" is an array containing the times the worm head has spent at a distance $x$ and time $\tau$ from its tail, "Ct_phi" and "Cx_phi" are $C_\varphi(x,0)$ and $C_\varphi(0,\tau)$, "algotime" is the algorithmic time in number of operations (not sweeps) and "field" the actual field configuration. Format : vector of strings.
 - PERCENT\_SAVE : save observables after every PERCENT\_SAVE % of the simulation. Format : strictly positive int.
