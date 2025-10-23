@@ -1,31 +1,32 @@
 # README #
 
-Copyright (C) 2025 Oscar Bouverot-Dupuis <oscar.bouverot-dupuis@ipht.fr>, Alberto Rosso <alberto.rosso@cnrs.fr> and Manon Michel <manon.michel@cnrs.fr>.
+Copyright (C) 2025 Oscar Bouverot-Dupuis <oscar.bouverot-dupuis@ipht.fr>, Alberto Rosso <alberto.rosso@cnrs.fr> and Laura Foini <laura.foini@ipht.fr>.
 
 This program is free software; you can redistribute it and/or modify it under the terms of either the CeCILL license or the GNU General Public license, as included with the software package.
 
 ### Summary of the numerical project ###
 
-This is the public version of the code presented in "Bosonized 1D quantum systems through enhanced Event-Chain Monte Carlo", Oscar Bouverot-Dupuis, Alberto Rosso, and Manon Michel. 
+This is the public version of the code presented in "The generic Mott transition in the sine-Gordon model through an embedded worm algorithm", Oscar Bouverot-Dupuis, Laura Foini and Alberto Rosso.
 
-See the arXiv preprint: https://arxiv.org/abs/2503.11577.
+See the arXiv preprint:
 
-This package performs Monte Carlo simulations on the bosonized dissipative XXZ spin chain, using C++. It incorporates the Metropolis algorithm (Met), the Metropolis algorithm enhanced with cluster moves (Clu-Met), the Event-Chain Monte Carlo algorithm (ECMC), and the ECMC enhanced with cluster moves (Clu-EC).
+This package performs Monte Carlo simulations on the tilted sine-Gordon model, using C++. It incorporates the Worm algorithm (Wo) and the smooth worm algorithm (SmoWo).
 
 ### Organization of the code ###
 - Constants.h is the file where the user declares all the simulation parameters. It is the only file the user needs to edit.
 
 - main.cpp and Imports.h respectively contain the common sampling routine for all algorithms and necessary package imports.
 
-- PhysSystem\_\*.h and Sampler\_\*.h (\* = Met, Clu\_Met, ECMC, Clu\_EC) contain the algorithm-specific parts of the code. Sampler\_\*.h performs a high-level sampling routine by calling lower-level functions grouped in PhysSystem\_\*.h.
+- PhysSystem\_\*.h and Sampler\_\*.h (\* = Wo, SmoWo) contain the algorithm-specific parts of the code. Sampler\_\*.h performs a high-level sampling routine by calling lower-level functions grouped in PhysSystem\_\*.h.
 
 
 ### Set up ###
 
 The version of C++ used was C++17.
 Choose the simulation parameters by editing the Constants.h file. The parameters to update from are
-- #include "Sampler\_\*.h" : choose algorithm to use by replacing \* by Met, Clu\_Met, ECMC, or Clu\_EC.
-- Ns : all system sizes N (the 2D system is of size NxN). Format : vector of strictly positive ints.
+- #include "Sampler\_\*.h" : choose algorithm to use by replacing \* by Wo or SmoWo.
+- Ls : all system sizes L. Format : vector of strictly positive ints.
+- Bs : all system inverse temperatures $\beta=1/T$. Format : vector of strictly positive ints.
 - Ks : all Luttinger parameters K. Format : vector of strictly positive doubles. 
 - alphas : all dissipation strengths alpha. Format : vector of positive doubles.
 - g : Umklapp strength g. Format : positive double.
@@ -36,6 +37,21 @@ Choose the simulation parameters by editing the Constants.h file. The parameters
 - TOTAL\_NUMBER\_SAMPLE : total number of samples for each observables. Format : strictly positive double.
 - OUTPUT\_DISTANCE\_SWEEPS : samples are ouputted after OUTPUT\_DISTANCE\_SWEEPS*N^2 operations. Format : strictly positive int.
 
+std::vector<int> Ls = { 256 };
+std::vector<int> Bs = { 256 };
+std::vector<double> Ks = { 0.35 };
+std::vector<double> mus = { 0 };
+double g = 1;
+
+//Sampling
+double lambda_w = 1;
+double lambda_r_prefactor = 0.1;
+std::string path = "C:\\Users\\oscar\\algo_Mott\\results\\SmoWo_tests";    //for instance C:\\Users\\...
+std::vector<std::string> OBSERVABLES({ "N_space", "N_time", "field" });  //Select any from: "N_space", "N_time", "kappa", "rho_s", "C_2kf", "C_theta", "Ct_phi", "Cx_phi", "algotime", "field"
+int PERCENT_SAVE = 1;
+double TOTAL_NUMBER_SAMPLE = 1000;
+double OUTPUT_DISTANCE_SWEEPS = 20;
+int data_block_avg = 20;
 
 ### Usage ###
 Update the Constants.h file as explained in the above. Execute the file main.cpp using the g++ compiler command or a C++ editor (Visual Studio, etc.).
