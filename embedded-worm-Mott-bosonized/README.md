@@ -8,7 +8,7 @@ This program is free software; you can redistribute it and/or modify it under th
 
 This is the public version of the code presented in "The generic Mott transition in the sine-Gordon model through an embedded worm algorithm", Oscar Bouverot-Dupuis, Laura Foini and Alberto Rosso.
 
-See the arXiv preprint:
+See the arXiv preprint: https://arxiv.org/abs/2510.20901
 
 This package performs Monte Carlo simulations on the tilted sine-Gordon model, using C++. It incorporates the Worm algorithm (Wo) and the smooth worm algorithm (SmoWo).
 
